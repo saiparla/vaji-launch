@@ -2,6 +2,8 @@ import React, { useState, useEffect, useMemo, useRef } from 'react'
 import { Box, Typography, Container } from '@mui/material'
 import { motion } from 'framer-motion'
 
+const BASE_URL = import.meta.env.BASE_URL
+
 // Text lines for tribute
 const LINES = [
   { id: 'salutation', text: 'ప్రత్యేక కృతజ్ఞతలు' },
@@ -155,10 +157,10 @@ export default function TributeIntro({ onFinish }) {
         >
           <Box
             component="img"
-            src="/chandrababu-naidu.jfif"
+            src={`${BASE_URL}chandrababu-naidu.jfif`}
             alt="శ్రీ నారా చంద్రబాబు నాయుడు గారు"
             onError={(e) => {
-              e.currentTarget.src = '/nara%20chandrababu%20naidu.jfif'
+              e.currentTarget.src = `${BASE_URL}nara%20chandrababu%20naidu.jfif`
             }}
             sx={{
               width: { xs: 190, sm: 230, md: 275, lg: 305 },
