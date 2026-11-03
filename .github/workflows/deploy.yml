@@ -88,6 +88,19 @@ jobs:
           fi
 
           cp "$SITE_DIR/index.html" "$SITE_DIR/404.html"
+
+          # GitHub Pages serves nested index.html files reliably for clean route URLs.
+          # Vike noExtraDir emits stage.html and overview.html, so mirror them into folders.
+          for route in stage overview; do
+            if [ -f "$SITE_DIR/$route.html" ]; then
+              mkdir -p "$SITE_DIR/$route"
+              cp "$SITE_DIR/$route.html" "$SITE_DIR/$route/index.html"
+            elif [ ! -f "$SITE_DIR/$route/index.html" ]; then
+              echo "::error::Vike did not generate $route.html or $route/index.html."
+              exit 1
+            fi
+          done
+
           touch "$SITE_DIR/.nojekyll"
 
           echo "Selected output directory: $SITE_DIR"
