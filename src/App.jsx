@@ -5,9 +5,17 @@ import StageCurtainPlayer from './components/StageCurtainPlayer.jsx'
 import ChannelOverviewPlayer from './components/ChannelOverviewPlayer.jsx'
 
 function App() {
-  const [currentPath, setCurrentPath] = useState(
-    typeof window !== 'undefined' ? window.location.pathname : '/'
-  )
+  const BASE_URL = import.meta.env.BASE_URL
+  const getCurrentRoute = () => {
+    if (typeof window === 'undefined') return '/'
+    const pathname = window.location.pathname
+    const route = pathname.startsWith(BASE_URL)
+      ? pathname.slice(BASE_URL.length)
+      : pathname.replace(/^\\//, '')
+    return route ? `/${route.replace(/\\/$/, '')}` : '/'
+  }
+
+  const [currentPath, setCurrentPath] = useState(getCurrentRoute)
 
   useEffect(() => {
     const handlePopState = () => {
@@ -62,21 +70,21 @@ function App() {
 
   const navigateToStage = () => {
     if (typeof window !== 'undefined') {
-      window.history.pushState({}, '', '/stage')
+      window.history.pushState({}, '', `${BASE_URL}stage`)
       setCurrentPath('/stage')
     }
   }
 
   const navigateToOverview = () => {
     if (typeof window !== 'undefined') {
-      window.history.pushState({}, '', '/overview')
+      window.history.pushState({}, '', `${BASE_URL}overview`)
       setCurrentPath('/overview')
     }
   }
 
   const navigateToHome = () => {
     if (typeof window !== 'undefined') {
-      window.history.pushState({}, '', '/')
+      window.history.pushState({}, '', BASE_URL)
       setCurrentPath('/')
     }
   }
@@ -89,7 +97,7 @@ function App() {
           '@import': "url('https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800;900&family=Montserrat:wght@500;600;700;800;900&display=swap')",
           '@font-face': {
             fontFamily: 'Potti Sreeramulu',
-            src: "url('/PottiSreeramulu-Regular.otf') format('opentype'), url('/Potti%20Sreeramulu%20Regular.otf') format('opentype')",
+            src: `url('${BASE_URL}PottiSreeramulu-Regular.otf') format('opentype'), url('${BASE_URL}Potti%20Sreeramulu%20Regular.otf') format('opentype')`,
             fontWeight: 'normal',
             fontStyle: 'normal',
             fontDisplay: 'swap',
