@@ -6,5 +6,7 @@ export default {
   favicon: '/vaji-launch/favicon.ico',
   ssr: true,
   clientRouting: true,
-  prerender: true
+  prerender: {
+    noExtraDir: true
+  }
 }
