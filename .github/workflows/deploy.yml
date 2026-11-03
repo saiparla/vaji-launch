@@ -1,0 +1,77 @@
+name: Deploy Vaji Launch to GitHub Pages
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: github-pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository (including Git LFS media)
+        uses: actions/checkout@v4
+        with:
+          lfs: true
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build static site
+        run: npm run build
+
+      - name: Prepare GitHub Pages artifact
+        run: |
+          if [ -d dist/client ]; then
+            SITE_DIR="dist/client"
+          elif [ -d dist ]; then
+            SITE_DIR="dist"
+          else
+            echo "Build output directory not found."
+            exit 1
+          fi
+
+          # Keep client-side routes working when a visitor refreshes /stage or /overview.
+          if [ -f "$SITE_DIR/index.html" ]; then
+            cp "$SITE_DIR/index.html" "$SITE_DIR/404.html"
+          else
+            echo "index.html was not generated in $SITE_DIR."
+            exit 1
+          fi
+
+          echo "SITE_DIR=$SITE_DIR" >> "$GITHUB_ENV"
+
+      - name: Configure GitHub Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: ${{ env.SITE_DIR }}
+
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
