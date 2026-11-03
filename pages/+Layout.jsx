@@ -1,6 +1,8 @@
 import React, { useMemo } from 'react'
 import { ThemeProvider, createTheme, CssBaseline, GlobalStyles } from '@mui/material'
 
+const BASE_URL = import.meta.env.BASE_URL
+
 export default function Layout({ children }) {
   const theme = useMemo(
     () =>
@@ -50,7 +52,7 @@ export default function Layout({ children }) {
           '@import': "url('https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800;900&family=Montserrat:wght@500;600;700;800;900&display=swap')",
           '@font-face': {
             fontFamily: 'Potti Sreeramulu',
-            src: "url('/PottiSreeramulu-Regular.otf') format('opentype'), url('/Potti%20Sreeramulu%20Regular.otf') format('opentype')",
+            src: `url('${BASE_URL}PottiSreeramulu-Regular.otf') format('opentype'), url('${BASE_URL}Potti%20Sreeramulu%20Regular.otf') format('opentype')`,
             fontWeight: 'normal',
             fontStyle: 'normal',
             fontDisplay: 'swap',
