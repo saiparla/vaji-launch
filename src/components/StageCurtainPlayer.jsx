@@ -316,7 +316,7 @@ export default function StageCurtainPlayer({ onBack, onNavigateToOverview }) {
       onNavigateToOverview()
     } else if (typeof window !== 'undefined') {
       import('vike/client/router')
-        .then(({ navigate }) => navigate(`${BASE_URL}overview`))
+        .then(({ navigate }) => navigate(`${BASE_URL}overview/`))
         .catch(() => {
           window.location.href = `${BASE_URL}overview`
         })
