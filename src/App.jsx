@@ -6,21 +6,21 @@ import ChannelOverviewPlayer from './components/ChannelOverviewPlayer.jsx'
 
 function App() {
   const BASE_URL = import.meta.env.BASE_URL
+
   const getCurrentRoute = () => {
     if (typeof window === 'undefined') return '/'
     const pathname = window.location.pathname
     const route = pathname.startsWith(BASE_URL)
       ? pathname.slice(BASE_URL.length)
-      : pathname.replace(/^\\//, '')
-    return route ? `/${route.replace(/\\/$/, '')}` : '/'
+      : pathname.slice(1)
+    const normalizedRoute = route.endsWith('/') ? route.slice(0, -1) : route
+    return normalizedRoute ? `/${normalizedRoute}` : '/'
   }
 
   const [currentPath, setCurrentPath] = useState(getCurrentRoute)
 
   useEffect(() => {
-    const handlePopState = () => {
-      setCurrentPath(window.location.pathname)
-    }
+    const handlePopState = () => setCurrentPath(getCurrentRoute())
     window.addEventListener('popstate', handlePopState)
     return () => window.removeEventListener('popstate', handlePopState)
   }, [])
