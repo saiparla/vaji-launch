@@ -5,6 +5,8 @@ import { navigate } from 'vike/client/router'
 import { AnimatePresence, motion } from 'framer-motion'
 import TributeIntro from './TributeIntro.jsx'
 
+const BASE_URL = import.meta.env.BASE_URL
+
 export default function AVVideoPlayer({ onComplete }) {
   const videoRef = useRef(null)
   const tributeFinishedRef = useRef(false)
@@ -27,9 +29,9 @@ export default function AVVideoPlayer({ onComplete }) {
       onComplete()
     } else {
       try {
-        navigate('/stage')
+        navigate(`${BASE_URL}stage`)
       } catch {
-        window.location.href = '/stage'
+        window.location.href = `${BASE_URL}stage`
       }
     }
   }, [onComplete])
@@ -162,9 +164,9 @@ export default function AVVideoPlayer({ onComplete }) {
           transition: 'opacity 0.4s ease',
         }}
       >
-        <source src="/journey-75.mp4" type="video/mp4" />
-        <source src="/75-Years-Journey-SnapYT.App (2).mp4" type="video/mp4" />
-        <source src="/api/stream-video?video=journey" type="video/mp4" />
+        <source src={`${BASE_URL}journey-75.mp4`} type="video/mp4" />
+        <source src={`${BASE_URL}75-Years-Journey-SnapYT.App (2).mp4`} type="video/mp4" />
+        <source  type="video/mp4" />
       </video>
 
       {/* PHASE 1: Pure White Screen waiting for any key press or click */}
