@@ -820,7 +820,7 @@ export default function StageCurtainPlayer({ onBack, onNavigateToOverview }) {
                     tilt="right"
                     deviceStyle="iphone"
                     showPoweredBy={true}
-                    poweredByLogo="/Hippo_Logo_Black.png"
+                    poweredByLogo={`${BASE_URL}Hippo_Logo_Black.png`}
                   />
                 )}
               </Box>
