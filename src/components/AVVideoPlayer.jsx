@@ -29,7 +29,7 @@ export default function AVVideoPlayer({ onComplete }) {
       onComplete()
     } else {
       try {
-        navigate(`${BASE_URL}stage`)
+        navigate(`${BASE_URL}stage/`)
       } catch {
         window.location.href = `${BASE_URL}stage`
       }
