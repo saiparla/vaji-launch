@@ -95,10 +95,8 @@ jobs:
           echo "site_dir=$SITE_DIR" >> "$GITHUB_OUTPUT"
           du -sh "$SITE_DIR"
 
-      - name: Enable and configure GitHub Pages
+      - name: Configure GitHub Pages
         uses: actions/configure-pages@v6
-        with:
-          enablement: true
 
       - name: Upload GitHub Pages artifact
         uses: actions/upload-pages-artifact@v4
