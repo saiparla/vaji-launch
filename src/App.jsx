@@ -70,14 +70,14 @@ function App() {
 
   const navigateToStage = () => {
     if (typeof window !== 'undefined') {
-      window.history.pushState({}, '', `${BASE_URL}stage`)
+      window.history.pushState({}, '', `${BASE_URL}stage/`)
       setCurrentPath('/stage')
     }
   }
 
   const navigateToOverview = () => {
     if (typeof window !== 'undefined') {
-      window.history.pushState({}, '', `${BASE_URL}overview`)
+      window.history.pushState({}, '', `${BASE_URL}overview/`)
       setCurrentPath('/overview')
     }
   }
