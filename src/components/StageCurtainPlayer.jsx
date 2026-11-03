@@ -6,6 +6,8 @@ import CelebrationRoundedIcon from '@mui/icons-material/CelebrationRounded'
 import { motion, AnimatePresence } from 'framer-motion'
 import MobileMockup from './MobileMockup.jsx'
 
+const BASE_URL = import.meta.env.BASE_URL
+
 // Realistic 3D Balloon themes (Highlight, Main, Deep Shadow, Edge)
 const BALLOON_THEMES = [
   { name: 'red', highlight: '#FF8A80', main: '#E53935', dark: '#B71C1C', edge: '#880E4F' },
@@ -314,9 +316,9 @@ export default function StageCurtainPlayer({ onBack, onNavigateToOverview }) {
       onNavigateToOverview()
     } else if (typeof window !== 'undefined') {
       import('vike/client/router')
-        .then(({ navigate }) => navigate('/overview'))
+        .then(({ navigate }) => navigate(`${BASE_URL}overview`))
         .catch(() => {
-          window.location.href = '/overview'
+          window.location.href = `${BASE_URL}overview`
         })
     }
   }
@@ -458,9 +460,9 @@ export default function StageCurtainPlayer({ onBack, onNavigateToOverview }) {
           backgroundColor: '#000000',
         }}
       >
-        <source src="/api/stream-video?video=curtain" type="video/mp4" />
-        <source src="/curtain-stage.mp4" type="video/mp4" />
-        <source src="/Stage-red-curtain-SnapYT.App.mp4" type="video/mp4" />
+        <source  type="video/mp4" />
+        <source src={`${BASE_URL}curtain-stage.mp4`} type="video/mp4" />
+        <source src={`${BASE_URL}Stage-red-curtain-SnapYT.App.mp4`} type="video/mp4" />
       </video>
 
       {/* Borderless Cinematic Launch Screen (No Box/Card Style) */}
@@ -745,7 +747,7 @@ export default function StageCurtainPlayer({ onBack, onNavigateToOverview }) {
               >
                 <Box
                   component="img"
-                  src="/Vaji-Logo-GIF.gif"
+                  src={`${BASE_URL}Vaji-Logo-GIF.gif`}
                   alt="Vaji Logo"
                   sx={{
                     width: { xs: 220, sm: 280, md: 340, lg: 390 },
@@ -790,7 +792,7 @@ export default function StageCurtainPlayer({ onBack, onNavigateToOverview }) {
                 >
                   <Box
                     component="img"
-                    src="/Vaji-Logo-GIF.gif"
+                    src={`${BASE_URL}Vaji-Logo-GIF.gif`}
                     alt="Vaji Logo"
                     sx={{
                       width: { xs: 200, sm: 250, md: 300, lg: 350 },
@@ -814,7 +816,7 @@ export default function StageCurtainPlayer({ onBack, onNavigateToOverview }) {
               >
                 {presentationStep >= 4 && (
                   <MobileMockup
-                    imageSrc="/vajione-app-screen.jpg"
+                    imageSrc={`${BASE_URL}vajione-app-screen.jpg`}
                     tilt="right"
                     deviceStyle="iphone"
                     showPoweredBy={true}
