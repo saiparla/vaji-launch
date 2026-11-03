@@ -1,6 +1,6 @@
 import React from 'react'
-import AVVideoPlayer from '../../src/components/AVVideoPlayer.jsx'
+import App from '../../src/App.jsx'
 
 export default function Page() {
-  return <AVVideoPlayer />
+  return <App />
 }
