@@ -3,6 +3,8 @@ import { Box, Button } from '@mui/material'
 import FastForwardRoundedIcon from '@mui/icons-material/FastForwardRounded'
 import { motion } from 'framer-motion'
 
+const BASE_URL = import.meta.env.BASE_URL
+
 export default function ChannelOverviewPlayer() {
   const videoRef = useRef(null)
   const [showSkip, setShowSkip] = useState(false)
