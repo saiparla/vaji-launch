@@ -139,9 +139,9 @@ export default function ChannelOverviewPlayer() {
               backgroundColor: '#000000',
             }}
           >
-            <source src="/journey-75.mp4" type="video/mp4" />
-            <source src="/75-Years-Journey-SnapYT.App (2).mp4" type="video/mp4" />
-            <source src="/api/stream-video?video=journey" type="video/mp4" />
+            <source src={`${BASE_URL}journey-75.mp4`} type="video/mp4" />
+            <source src={`${BASE_URL}75-Years-Journey-SnapYT.App (2).mp4`} type="video/mp4" />
+            <source  type="video/mp4" />
           </video>
 
           {/* Skip Button - Hidden for first 30 seconds, then appears */}
